@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
-import { NavbarComponent } from "./components/navbar/navbar.component";
 import { CommonModule } from '@angular/common';
 import { DarkmodeService } from './services/darkmode.service';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, NavbarComponent],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -19,5 +18,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     initFlowbite();
+    AOS.init();
   }
 }

@@ -13,7 +13,7 @@ module.exports = {
           dark: "#558B2F",
         },
         background: {
-          light: "#E8F5E9",
+          light: "#f3faf7",
           dark: "#111827",
         },
         border: {
@@ -49,6 +49,25 @@ module.exports = {
           light: "#2196F3",
           dark: "#42A5F5",
         },
+      },
+      keyframes: {
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "zoom-in": {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 0.8s ease-out",
+        "slide-up": "slide-up 0.8s ease-out",
+        "zoom-in": "zoom-in 0.8s ease-out",
       },
     },
   },
