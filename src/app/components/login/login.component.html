@@ -3,7 +3,8 @@
     <div class="hidden bg-cover lg:block lg:w-2/3 opacity-80 dark:opacity-40"
       style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)">
     </div>
-    <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6" data-aos="fade-down" data-aos-duration="1000" data-aos-delay="400">
+    <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6" data-aos="fade-down" data-aos-duration="1000"
+      data-aos-delay="400">
       <div class="flex-1">
         <div class="text-center">
           <div class="flex justify-center mx-auto">
@@ -26,12 +27,20 @@
         </div>
 
         <div class="mt-8">
-          <form>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div>
               <label for="email"
                 class="block mb-2 text-sm text-text-secondary-light dark:text-text-secondary-dark">Email Address</label>
-              <input type="email" name="email" id="email" placeholder="example@example.com"
+              <input type="email" name="email" formControlName="email" placeholder="example@example.com"
                 class="block w-full px-4 py-2 mt-2 text-text-secondary-light placeholder-text-secondary-light bg-white border border-gray-200 rounded-lg dark:placeholder-text-secondary-dark dark:bg-gray-900 dark:text-text-secondary-dark dark:border-gray-700 focus:border-primary-light dark:focus:border-primary-dark focus:ring-primary-light focus:outline-none focus:ring focus:ring-opacity-40" />
+              @if(loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+              @if(loginForm.get('email')?.errors?.['required']) {
+              <p class="text-red-700 dark:text-red-400">email is requierd</p>
+              }
+              @if(loginForm.get('email')?.errors?.['pattern']) {
+              <p class="text-red-700 dark:text-red-400">incorrect email form</p>
+              }
+              }
             </div>
 
             <div class="mt-6">
@@ -42,12 +51,23 @@
                   password?</a>
               </div>
 
-              <input type="password" name="password" id="password" placeholder="Your Password"
+              <input type="password" name="password" formControlName="password" placeholder="Your Password"
                 class="block w-full px-4 py-2 mt-2 text-text-secondary-light placeholder-text-secondary-light bg-white border border-gray-200 rounded-lg dark:placeholder-text-secondary-dark dark:bg-gray-900 dark:text-text-secondary-dark dark:border-gray-700 focus:border-primary-light dark:focus:border-primary-dark focus:ring-primary-light focus:outline-none focus:ring focus:ring-opacity-40" />
+              @if(loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+              @if(loginForm.get('password')?.errors?.['required']) {
+              <p class="text-red-700 dark:text-red-400">password is requierd</p>
+              }
+              @if(loginForm.get('password')?.errors?.['pattern']) {
+              <p class="text-red-700 dark:text-red-400">password must be at least 8 characters and digits</p>
+              }
+              }
+              @if (isShowMsg) {
+              <p class="text-red-700 dark:text-red-400">{{dataMsg}}</p>
+              }
             </div>
 
             <div class="mt-6">
-              <button
+              <button [disabled]="loginForm.invalid"
                 class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-primary-light rounded-lg hover:bg-primary-dark focus:outline-none focus:bg-primary-light focus:ring focus:ring-primary-light focus:ring-opacity-50">
                 Sign in
               </button>
@@ -55,8 +75,10 @@
 
           </form>
 
-          <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet?<a [routerLink]="['/signup']" routerLinkActive="router-link-active"
-              class="text-primary-light dark:text-primary-dark focus:outline-none focus:underline hover:underline">Sign up</a>.</p>
+          <p class="mt-6 text-sm text-center text-gray-400">Don&#x27;t have an account yet?<a [routerLink]="['/signup']"
+              routerLinkActive="router-link-active"
+              class="text-primary-light dark:text-primary-dark focus:outline-none focus:underline hover:underline">Sign
+              up</a>.</p>
         </div>
       </div>
     </div>
